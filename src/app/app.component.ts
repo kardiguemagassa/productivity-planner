@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthenticationService } from './core/authentication.service';
-import { switchMap } from 'rxjs';
+//import { AuthenticationService } from './core/authentication.service';
+//import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-
+/*
   readonly #authenticationService = inject(AuthenticationService);
 
   onLogin() {
@@ -27,5 +27,6 @@ export class AppComponent {
   ).subscribe((response) => console.log(response));
 
   }
+  */
 
 }
