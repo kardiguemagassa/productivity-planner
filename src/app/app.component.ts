@@ -5,11 +5,9 @@ import { NavbarSmartComponent } from './core/navbar/navbar.smart.component';
 //import { switchMap } from 'rxjs';
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, NavbarSmartComponent],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [RouterOutlet, NavbarSmartComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-
-}
+export class AppComponent {}

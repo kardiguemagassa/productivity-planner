@@ -26,22 +26,23 @@ interface FirebaseResponseSignin {
   registered: boolean;
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-
   readonly #http = inject(HttpClient);
 
   //constructor() { }
 
-  register(email: string, password: string): Observable<FirebaseResponseSignup> {
+  register(
+    email: string,
+    password: string,
+  ): Observable<FirebaseResponseSignup> {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseConfig.apiKey}`;
     const body = {
       email,
       password,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
     return this.#http.post<FirebaseResponseSignup>(url, body);
   }
@@ -53,8 +54,11 @@ export class AuthenticationService {
     return this.#http.post<FirebaseResponseSignin>(url, body);
   }
 
-  save(email: string, userId: string, bearerToken: string): Observable<unknown> {
-    
+  save(
+    email: string,
+    userId: string,
+    bearerToken: string,
+  ): Observable<unknown> {
     const baseUrl = `https://firestore.googleapis.com/v1/projects/${environment.firebaseConfig.projectId}/databases/(default)/documents`;
     const userFirestoreCollectionId = 'users';
     const url = `${baseUrl}/${userFirestoreCollectionId}?key=${environment.firebaseConfig.apiKey}&documentId=${userId}`;
@@ -71,6 +75,4 @@ export class AuthenticationService {
 
     return this.#http.post(url, body, options);
   }
-
-
 }

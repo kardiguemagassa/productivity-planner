@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './signup.page.component.html',
-  styleUrls: ['./signup.page.component.scss']
+  styleUrls: ['./signup.page.component.scss'],
 })
 export class SignupPageComponent {
   name = '';
@@ -19,7 +19,7 @@ export class SignupPageComponent {
       name: this.name,
       email: this.email,
       password: this.password,
-      confirmPassword: this.confirmPassword
+      confirmPassword: this.confirmPassword,
     });
   }
 }
