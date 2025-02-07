@@ -6,11 +6,8 @@ import { NavbarSmartComponent } from './core/navbar/navbar.smart.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, NavbarSmartComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-
-}
+export class AppComponent {}
