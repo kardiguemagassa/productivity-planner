@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NavbarSmartComponent } from './navbar.smart.component';
-import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('NavbarSmartComponent', () => {
   let component: NavbarSmartComponent;
@@ -12,9 +12,9 @@ describe('NavbarSmartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarSmartComponent]
-    })
-    .compileComponents();
+      imports: [NavbarSmartComponent],
+      providers: [provideRouter([]),]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarSmartComponent);
     component = fixture.componentInstance;
@@ -32,5 +32,4 @@ describe('NavbarSmartComponent', () => {
   it('should display webapp title', () => {
     expect(title.nativeElement.textContent).toContain('Productivity Planner');
   });
-  
 });

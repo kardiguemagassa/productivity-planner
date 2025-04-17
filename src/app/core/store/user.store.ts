@@ -1,4 +1,4 @@
-import { computed, inject } from '@angular/core';
+import { computed } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -6,14 +6,12 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { AuthenticationService } from '../authentication.service';
-import { User, Visitor } from '../entity/user.interface';
-import { UserService } from '../repository/user.service';
+import { User } from '../entity/user.interface';
 
 interface UserState {
   user: User | undefined;
 }
-
+export type UserStore = InstanceType<typeof UserStore>;
 export const UserStore = signalStore(
   { providedIn: 'root' },
   withState<UserState>({
@@ -26,31 +24,9 @@ export const UserStore = signalStore(
 
     return { isGoogleUser };
   }),
-  withMethods(
-    (
-      store,
-      authenticationService = inject(AuthenticationService),
-      userService = inject(UserService)
-    ) => ({
-      register(visitor: Visitor): void {
-        authenticationService
-          .register(visitor.email, visitor.password)
-          .subscribe((response) => {
-            const user: User = {
-              id: response.userId,
-              name: visitor.name,
-              email: visitor.email,
-            };
-
-            userService.create(user, response.jwtToken).subscribe({
-              next: () => {
-                patchState(store, { user });
-              },
-            });
-          });
-        // 👇 Updating state using the `patchState` function.
-        // patchState(store, (state) => ({ filter: { ...state.filter, query } }));
-      },
-    })
-  )
+  withMethods((store) => ({
+    load(user: User): void {
+      patchState(store, { user });
+    },
+  }))
 );

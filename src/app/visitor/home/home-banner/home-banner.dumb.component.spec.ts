@@ -14,12 +14,12 @@ describe('HomeBannerDumbComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeBannerDumbComponent]
-    })
-    .compileComponents();
+      imports: [HomeBannerDumbComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeBannerDumbComponent);
     component = fixture.componentInstance;
+
     fixture.componentRef.setInput('title', 'expectedTitle');
     fixture.componentRef.setInput('description', 'expectedDescription');
     fixture.componentRef.setInput('button', 'expectedButton');
@@ -43,17 +43,14 @@ describe('HomeBannerDumbComponent', () => {
   it('should display title', () => {
     expect(title.nativeElement.textContent).toContain('expectedTitle');
   });
-
   it('should display description', () => {
     expect(description.nativeElement.textContent).toContain(
       'expectedDescription'
     );
   });
-
   it('should display button', () => {
     expect(button.nativeElement.textContent).toContain('expectedButton');
   });
-
   it('should trigger event on button click', () => {
     jest.spyOn(component.clicked, 'emit');
 
@@ -61,6 +58,4 @@ describe('HomeBannerDumbComponent', () => {
 
     expect(component.clicked.emit).toHaveBeenNthCalledWith(1);
   });
-
-
 });
