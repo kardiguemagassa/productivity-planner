@@ -30,11 +30,11 @@ jobs:
 
       # Audit de sécurité
       - name: Audit
-        run: npm audit
+        run: npm audit signatures --audit-level=high
 
       # Vérification de la signature des audits
       - name: Audit Signature
-        run: npm audit signatures
+        run: npm audit signatures --audit-level=high
 
       # Linter
       - name: Lint
@@ -44,14 +44,16 @@ jobs:
       - name: Test
         run: npm run test
 
-
       # Set environment variables
       - name: Create environment file
         run: |
           mkdir environments
           echo "Creating production environment file..."
-          echo "${{ secrets.ENVIRONMENT_PRODUCTION_FILE }}" >> environments/environment.ts
+          echo "${{ secrets.ENVIRONMENT_PRODUCTION_FILE }}" >> src/environments/environment.ts
 
+      # Tests
+      - name: Test
+        run: npm run test
 
       # Build
       - name: Build
