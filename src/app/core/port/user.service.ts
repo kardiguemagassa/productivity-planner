@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserFirebaseService } from './user-firebase.service';
 import { User } from '../entity/user.interface';
+import { UserFirebaseService } from '../adapter/authentication.service';
 
 @Injectable({
   providedIn: 'root',
   useClass: UserFirebaseService,
 })
 export abstract class UserService {
+  abstract fetch(userId: string, bearerToken: string): Observable<User>;
   abstract create(user: User, bearerToken: string): Observable<void>;
 
-  // fetch(id: string): Observable<User> {}
-  // delete(user: User): Observable<void> {}
+  // delete(user: User): Observable<void> {};
   // update(user: User): Observable<void> {};
 }
