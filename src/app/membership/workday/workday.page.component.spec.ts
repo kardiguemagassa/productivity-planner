@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorkdayPageComponent } from './workday.page.storet';
+import { WorkdayPageComponent } from './workday.page.component';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('WorkdayPageComponent', () => {
