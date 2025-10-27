@@ -1,11 +1,12 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { LoginUserUseCase } from './login-user.use-case';
-import { AuthenticationService } from '@app/core/port/authentication.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@app/core/port/authentication.service';
 import { UserService } from '@app/core/port/user.service';
 import { UserStore } from '@app/core/store/user.store';
 import { of } from 'rxjs';
 import { InvalidCredentialError } from './invalid-credential.error';
+import { LoginUserUseCase } from './login-user.use-case';
 
 describe('LoginUserUseCaseService', () => {
   let loginUserUseCase: LoginUserUseCase;
@@ -24,9 +25,10 @@ describe('LoginUserUseCaseService', () => {
   });
 
   describe('when user provides valid credentials', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         providers: [
+          provideZonelessChangeDetection(),
           LoginUserUseCase,
           { 
             provide: AuthenticationService, 
@@ -43,7 +45,7 @@ describe('LoginUserUseCaseService', () => {
           { provide: UserStore, useValue: { load: jest.fn() }},
           { provide: Router, useValue: { navigate: jest.fn() }}
         ],
-      });
+      }).compileComponents();
   
       loginUserUseCase = TestBed.inject(LoginUserUseCase);
       authenticationService = TestBed.inject(AuthenticationService);
@@ -81,9 +83,10 @@ describe('LoginUserUseCaseService', () => {
   });
 
   describe('when user provides invalid credentials', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         providers: [
+          provideZonelessChangeDetection(),
           LoginUserUseCase,
           Router,
           { 
@@ -95,7 +98,7 @@ describe('LoginUserUseCaseService', () => {
           { provide: UserService, useValue: { create: jest.fn() }},
           { provide: UserStore, useValue: { register: jest.fn() }},
         ],
-      });
+      }).compileComponents();
   
       loginUserUseCase = TestBed.inject(LoginUserUseCase);
     });

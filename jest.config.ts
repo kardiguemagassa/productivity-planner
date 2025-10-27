@@ -1,39 +1,17 @@
-/**
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  // All imported modules in your tests should be mocked automatically
-  // automock: false,
-
-  // Stop running tests after `n` failures
-  // bail: 0,
-
-  // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "/private/var/folders/pw/f76zn6t127d1v319hbnydgs40000gn/T/jest_dx",
-
-  // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
-
-  // Indicates whether the coverage information should be collected while executing the test
-  //collectCoverage: false,
-
-  // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
-
-  // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
-
-  // Indicates which provider should be used to instrument code for coverage
+  coverageDirectory: 'coverage',
   coverageProvider: "v8",
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testEnvironment: 'jsdom',
+  roots: ['<rootDir>/src'],
+  moduleNameMapper: {
+    '^@env/(.*)$': '<rootDir>/src/environments/$1',
+    '^@app/(.*)$': '<rootDir>/src/app/$1'
+  },
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -90,22 +68,11 @@ const config: Config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    "^@app/(.*)$": "<rootDir>/src/app/$1",
-    '^@env/(.*)$': '<rootDir>/src/environments/$1',
-  },
-
-  // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
-  // modulePathIgnorePatterns: [],
-
   // Activates notifications for test results
   // notify: false,
 
   // An enum that specifies notification mode. Requires { notify: true }
   // notifyMode: "failure-change",
-
-  // A preset that is used as a base for Jest's configuration
-  preset: 'jest-preset-angular',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -147,9 +114,6 @@ const config: Config = {
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
-
-  // The test environment that will be used for testing
-  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
