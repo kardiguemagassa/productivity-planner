@@ -8,7 +8,6 @@ import { WorkdayStore } from './workday.page.store';
 describe('WorkdayPageComponent', () => {
   let component: WorkdayPageComponent;
   let fixture: ComponentFixture<WorkdayPageComponent>;
-  let store: WorkdayStore;
 
   const getAddTaskButton = () =>
     fixture.debugElement.query(By.css('[data-testid="add-task-button"]'));
