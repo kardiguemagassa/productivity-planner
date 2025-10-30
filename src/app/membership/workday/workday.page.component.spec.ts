@@ -44,7 +44,6 @@ describe('WorkdayPageComponent', () => {
 
     fixture = TestBed.createComponent(WorkdayPageComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(WorkdayStore);
     fixture.detectChanges();
   });
 
