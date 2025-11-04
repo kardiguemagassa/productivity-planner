@@ -9,7 +9,7 @@ const config: Config = {
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/src'],
   moduleNameMapper: {
-    '^@env/(.*)$': '<rootDir>/src/environments/$1',
+    '^@env/environment$': '<rootDir>/src/environments/environment.ts',
     '^@app/(.*)$': '<rootDir>/src/app/$1'
   },
 
