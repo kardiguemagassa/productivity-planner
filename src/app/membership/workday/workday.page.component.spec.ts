@@ -1,7 +1,9 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { WorkdayPageComponent } from './workday.page.component';
+import { WorkdayStore } from './workday.page.store';
 
 describe('WorkdayPageComponent', () => {
   let component: WorkdayPageComponent;
@@ -26,7 +28,18 @@ describe('WorkdayPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [WorkdayPageComponent],
-      providers: [provideZonelessChangeDetection()],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideAnimations(),
+        {
+          provide: WorkdayStore,
+          useValue: {
+            tasks: [],
+            addTask: jest.fn(),
+            removeTask: jest.fn(),
+          }
+        }
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkdayPageComponent);

@@ -1,24 +1,26 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { RegisterUserUseCase } from './register-user.use-case';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/port/authentication.service';
 import { UserService } from '@app/core/port/user.service';
 import { UserStore } from '@app/core/store/user.store';
-import { Router } from '@angular/router';
+import { RegisterUserUseCase } from './register-user.use-case';
 
 describe('RegisterUserUseCaseService', () => {
   let service: RegisterUserUseCase;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       providers: [
+        provideZonelessChangeDetection(),
         RegisterUserUseCase,
         { provide: AuthenticationService, useValue: { register: jest.fn()}},
         { provide: UserService, useValue: { create: jest.fn( )}},
         { provide: UserStore, useValue: { register: jest.fn() }},
         { provide: Router, useValue: { navigate: jest.fn() }},
       ],
-    });
+    }).compileComponents();
     service = TestBed.inject(RegisterUserUseCase);
   });
 
